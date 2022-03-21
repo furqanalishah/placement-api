@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  placement_db:
+    image: mysql:5.7.8
+    container_name: placement_db
+    environment:
+      MYSQL_DATABASE: placement_db
+      MYSQL_USER: webuser
+      MYSQL_PASSWORD: admin123
+      MYSQL_ROOT_PASSWORD: admin123
+    volumes:
+      - ./data/webdb:/var/lib/mysql
+  placement_web:
+    restart: always
+    build: .
+    container_name: placement_web
+    entrypoint: /app/bin/run_web.sh
+    volumes:
+      - .:/app
+    ports:
+      - "8081:8081"
