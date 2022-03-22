@@ -8,6 +8,7 @@ compress = Compress()
 db = SQLAlchemy()
 
 
+
 def create_app(environment):
     app = APIFlask(__name__, title="Placement API Docs", version="1.0", redoc_path="/apidocs")
     config = flask_config[environment]
