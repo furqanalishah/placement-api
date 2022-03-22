@@ -8,7 +8,6 @@ compress = Compress()
 db = SQLAlchemy()
 
 
-
 def create_app(environment):
     app = APIFlask(__name__, title="Placement API Docs", version="1.0", redoc_path="/apidocs")
     config = flask_config[environment]
@@ -20,6 +19,6 @@ def create_app(environment):
 
     from .buckets import buckets as buckets_blueprint
 
-    app.register_blueprint(buckets_blueprint, urlprefix="/api")
+    app.register_blueprint(buckets_blueprint)
 
     return app

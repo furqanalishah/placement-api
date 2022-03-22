@@ -1,6 +1,6 @@
 import uuid
 
-from sqlalchemy import Column, Enum, Integer, String, Text
+from sqlalchemy import Column, Enum, ForeignKey, String, Text
 from sqlalchemy.orm import backref, relationship
 
 from placement.models.base import Base
@@ -27,6 +27,7 @@ class Load(Base):
     state = Column(Enum(*ALL_LOAD_STATES_LIST), default=LOAD_STATE_PENDING)
     __workload_system_name = Column('workload_system_name', String(255), nullable=False)
 
+    bucket_id = Column(String(32), ForeignKey("buckets.id"))
     resources = relationship("Resource", backref=backref("load", cascade="all, delete-orphan", lazy="dynamic"))
 
     def __init__(self, name, state, workload_system_name, description=None):
