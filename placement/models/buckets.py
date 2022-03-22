@@ -1,17 +1,10 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, PrimaryKeyConstraint, String, Table, Text
+from sqlalchemy import Boolean, Column, DateTime, String, Text
 from sqlalchemy.orm import backref, relationship
 
 from placement.models.base import Base
-
-bucket_load_allocations = Table(
-    "bucket_load_allocations", Base.metadata,
-    Column("bucket_id", String(32), ForeignKey("buckets.id"), nullable=False),
-    Column("load_id", String(32), ForeignKey("loads.id"), nullable=False),
-    PrimaryKeyConstraint("bucket_id", "load_id"),
-)
 
 
 class Bucket(Base):
@@ -24,10 +17,7 @@ class Bucket(Base):
     online = Column(Boolean, nullable=False, default=True)
     last_seen = Column(DateTime, default=datetime.utcnow())
 
-    loads = relationship(
-        "Load", secondary=bucket_load_allocations, lazy="dynamic",
-        backref=backref("buckets", lazy="dynamic")
-    )
+    loads = relationship("Load", backref=backref("bucket", cascade="all, delete-orphan", lazy="dynamic"))
     resources = relationship("Resource", backref=backref("load", cascade="all, delete-orphan", lazy="dynamic"))
 
     def __init__(self, name, enabled=True, online=True, description=None, last_seen=None):
