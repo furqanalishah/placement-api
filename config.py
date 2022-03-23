@@ -4,6 +4,11 @@ import os
 BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
 
+class PaginationConfig:
+    DEFAULT_ITEMS_PER_PAGE = 10
+    MAX_ITEMS_PER_PAGE = 50
+
+
 class MYSQLConfig:
     MYSQL_PARAMS = {
         "MYSQL_USER": os.environ.get("MYSQL_USER", "root"),

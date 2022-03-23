@@ -6,6 +6,12 @@ from placement.models.base import Base
 
 
 class Resource(Base):
+    ID_KEY = "id"
+    ELEMENT_KEY = "element"
+    CAPACITY_KEY = "capacity"
+    UTILISATION_KEY = "utilisation"
+    TYPE_KEY = "type"
+
     __tablename__ = "resources"
 
     RESOURCE_TYPE_WORKLOAD = "workload"
@@ -29,3 +35,12 @@ class Resource(Base):
         self.utilisation = utilisation
         self.element = element
         self.type_ = type_
+
+    def to_json(self):
+        return {
+            self.ID_KEY: self.id,
+            self.ELEMENT_KEY: self.element,
+            self.CAPACITY_KEY: self.capacity,
+            self.UTILISATION_KEY: self.utilisation,
+            self.TYPE_KEY: self.type_
+        }

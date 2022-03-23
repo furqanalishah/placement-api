@@ -1,8 +1,8 @@
 """bucket, load, and resource models
 
-Revision ID: 742ee7922932
+Revision ID: dc58455745ac
 Revises: 
-Create Date: 2022-03-22 14:29:10.535521
+Create Date: 2022-03-22 15:01:24.290765
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '742ee7922932'
+revision = 'dc58455745ac'
 down_revision = None
 branch_labels = None
 depends_on = None
